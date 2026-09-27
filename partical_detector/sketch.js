@@ -36,7 +36,6 @@ function update() {
     if (Idistance < ScannerPX) {
         ScannerPX = ScannerPX - 1;
     }
-
     colour = r.WHITE;
 
     let b = g.colourrangeselector(ScannerWidth, PFposnX, PFwidth, ScannerPX,)
