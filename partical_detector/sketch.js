@@ -1,58 +1,89 @@
 const r = require("raylib");
 const g = require("./geometry")
 
-const screenWidth = 1000;
-const screenHeight = 1000;
+const screenWidth = 300;
+const screenHeight = 150;
 const FPS = 60;
 
-const ScannerWidth = 40;
-const Scannerheight = 1000;
 let ScannerPX = 0;
 const ScannerPY = 0;
-const PFwidth = 100;
-const PFheight = 1000;
-const PFposnX = 400;
-const PFwidth1 = 20;
-const PFheight2 = 1000;
-const PFposnX3 = 200;
-const PFposnY4 = 0;
+const ScannerWidth = 20;
+const Scannerheight = 150;
+
+let ScannerPX1 = 150;
+const ScannerPY1 = 0;
+const Scannerwidth1 = 20;
+const Scannerheight1 = 150;
+
+const PFposnX = 120;
+const PFwidth = 30;
+const PFheight = 150;
 const PFposnY = 0;
+const PFwidth1 = 20;
+const PFheight1 = 150;
+const PFposnX1 = 190;
+const PFposnY1 = 0;
+
 let colour = r.WHITE;
-let Idistance = screenWidth - ScannerWidth;
+let colour1 = r.WHITE;
+let I_distance = screenWidth / 2 - ScannerWidth;
+let Idistance_1 = screenWidth - Scannerwidth1;
+
 function running() {
     return !r.WindowShouldClose();
 }
+
 function setup() {
     r.InitWindow(screenWidth, screenHeight, "Partical Detctor");
     r.SetTargetFPS(FPS);
 }
+
 function update() {
 
-    if (ScannerPX < Idistance) {
-        ScannerPX = ScannerPX + 0.5;
+    if (ScannerPX < I_distance) {
+        ScannerPX = ScannerPX + 1;
     }
-    if (ScannerPX === Idistance) {
-        Idistance = 0;
+    if (ScannerPX === I_distance) {
+        I_distance = 0;
     }
     if (ScannerPX === 0) {
-        Idistance = screenWidth - ScannerWidth;
+        I_distance = screenWidth / 2 - ScannerWidth;
     }
-    if (Idistance < ScannerPX) {
-        ScannerPX = ScannerPX - 0.5;
-    } colour = r.WHITE;
-    let a = g.colourrangeselector(ScannerWidth, PFposnX3, PFwidth1, ScannerPX,)
-    let b = g.colourrangeselector(ScannerWidth, PFposnX, PFwidth, ScannerPX,)
+    if (I_distance < ScannerPX) {
+        ScannerPX = ScannerPX - 1;
+    }
 
-    if (a || b) {
-        colour = r.RED;
+    colour = r.WHITE;
+
+    let a = g.colourrangeselector(ScannerWidth, PFposnX, PFwidth, ScannerPX)
+    if (a) { colour = r.RED }
+
+
+
+    if (ScannerPX1 < Idistance_1) {
+        ScannerPX1 = ScannerPX1 + 1;
     }
+    if (ScannerPX1 === Idistance_1) {
+        Idistance_1 = 150;
+    }
+    if (ScannerPX1 === 150) {
+        Idistance_1 = screenWidth - Scannerwidth1;
+    }
+    if (Idistance_1 < ScannerPX1) {
+        ScannerPX1 = ScannerPX1 - 1;
+    }
+
+    colour1 = r.WHITE;
+    let b = g.colourrangeselector(Scannerwidth1, PFposnX1, PFwidth1, ScannerPX1)
+    if (b) { colour1 = r.RED }
 }
+
 function draw() {
     r.BeginDrawing()
     r.ClearBackground(r.BLACK);
-
+    r.DrawRectangle(PFposnX1, PFposnY1, PFwidth1, PFheight1, r.BLUE)
     r.DrawRectangle(PFposnX, PFposnY, PFwidth, PFheight, r.BLUE)
-    r.DrawRectangle(PFposnX3, PFposnY4, PFwidth1, PFheight2, r.BLUE)
+    r.DrawRectangle(ScannerPX1, ScannerPY1, Scannerwidth1, Scannerheight1, colour1)
     r.DrawRectangle(ScannerPX, ScannerPY, ScannerWidth, Scannerheight, colour)
     r.EndDrawing();
 
@@ -68,4 +99,3 @@ module.exports = {
     draw,
     teardown,
 }
-
