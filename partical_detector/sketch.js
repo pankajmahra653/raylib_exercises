@@ -1,4 +1,5 @@
 const r = require("raylib");
+const g = require("./geometry")
 
 const screenWidth = 1000;
 const screenHeight = 1000;
@@ -12,6 +13,7 @@ const PFwidth = 100;
 const PFheight = 1000;
 const PFposnX = 400;
 const PFposnY = 0;
+let colour = r.WHITE;
 let Idistance = screenWidth - ScannerWidth;
 function running() {
     return !r.WindowShouldClose();
@@ -35,13 +37,20 @@ function update() {
         ScannerPX = ScannerPX - 1;
     }
 
+    colour = r.WHITE;
+
+    let b = g.colourrangeselector(ScannerWidth, PFposnX, PFwidth, ScannerPX,)
+
+    if (b) {
+        colour = r.RED;
+    }
 }
 function draw() {
     r.BeginDrawing()
     r.ClearBackground(r.BLACK);
 
     r.DrawRectangle(PFposnX, PFposnY, PFwidth, PFheight, r.BLUE)
-    r.DrawRectangle(ScannerPX, ScannerPY, ScannerWidth, Scannerheight, r.WHITE)
+    r.DrawRectangle(ScannerPX, ScannerPY, ScannerWidth, Scannerheight, colour)
     r.EndDrawing();
 
 }
