@@ -8,7 +8,10 @@ const ScannerWidth = 40;
 const Scannerheight = 1000;
 let ScannerPX = 0;
 const ScannerPY = 0;
-
+const PFwidth = 100;
+const PFheight = 1000;
+const PFposnX = 400;
+const PFposnY = 0;
 let Idistance = screenWidth - ScannerWidth;
 function running() {
     return !r.WindowShouldClose();
@@ -20,7 +23,7 @@ function setup() {
 function update() {
 
     if (ScannerPX < Idistance) {
-        ScannerPX = ScannerPX + 2.5;
+        ScannerPX = ScannerPX + 1;
     }
     if (ScannerPX === Idistance) {
         Idistance = 0;
@@ -29,7 +32,7 @@ function update() {
         Idistance = screenWidth - ScannerWidth;
     }
     if (Idistance < ScannerPX) {
-        ScannerPX = ScannerPX - 2.5;
+        ScannerPX = ScannerPX - 1;
     }
 
 }
@@ -37,6 +40,7 @@ function draw() {
     r.BeginDrawing()
     r.ClearBackground(r.BLACK);
 
+    r.DrawRectangle(PFposnX, PFposnY, PFwidth, PFheight, r.BLUE)
     r.DrawRectangle(ScannerPX, ScannerPY, ScannerWidth, Scannerheight, r.WHITE)
     r.EndDrawing();
 
