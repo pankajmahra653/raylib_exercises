@@ -12,6 +12,10 @@ const ScannerPY = 0;
 const PFwidth = 100;
 const PFheight = 1000;
 const PFposnX = 400;
+const PFwidth1 = 20;
+const PFheight2 = 1000;
+const PFposnX3 = 200;
+const PFposnY4 = 0;
 const PFposnY = 0;
 let colour = r.WHITE;
 let Idistance = screenWidth - ScannerWidth;
@@ -25,7 +29,7 @@ function setup() {
 function update() {
 
     if (ScannerPX < Idistance) {
-        ScannerPX = ScannerPX + 1;
+        ScannerPX = ScannerPX + 0.5;
     }
     if (ScannerPX === Idistance) {
         Idistance = 0;
@@ -34,13 +38,12 @@ function update() {
         Idistance = screenWidth - ScannerWidth;
     }
     if (Idistance < ScannerPX) {
-        ScannerPX = ScannerPX - 1;
-    }
-    colour = r.WHITE;
-
+        ScannerPX = ScannerPX - 0.5;
+    } colour = r.WHITE;
+    let a = g.colourrangeselector(ScannerWidth, PFposnX3, PFwidth1, ScannerPX,)
     let b = g.colourrangeselector(ScannerWidth, PFposnX, PFwidth, ScannerPX,)
 
-    if (b) {
+    if (a || b) {
         colour = r.RED;
     }
 }
@@ -49,6 +52,7 @@ function draw() {
     r.ClearBackground(r.BLACK);
 
     r.DrawRectangle(PFposnX, PFposnY, PFwidth, PFheight, r.BLUE)
+    r.DrawRectangle(PFposnX3, PFposnY4, PFwidth1, PFheight2, r.BLUE)
     r.DrawRectangle(ScannerPX, ScannerPY, ScannerWidth, Scannerheight, colour)
     r.EndDrawing();
 
@@ -64,3 +68,4 @@ module.exports = {
     draw,
     teardown,
 }
+
