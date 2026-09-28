@@ -110,8 +110,8 @@ function update() {
     let b = g.colourrangeselector(vertRightScannerwidth, vertRightPFieldX, vertRightPFieldwidth, vertRightScannerX)
     if (b) { RightScannerColour = r.RED }
 
-    let c = g.colourrangeselector(horizonScannerheight, horizonPFieldY, horizonPFieldHeight, horizonScannerY)
-    if (c) { Horizon_ScannerColour = r.RED }
+    let c = g.colourrangeselector(horizonScannerheight, horizonPFieldY, horizonPFieldHeight, horizonScannerY) ? r.RED : r.WHITE;
+    // if(c) { Horizon_ScannerColour = r.RED }
 }
 
 function draw() {
